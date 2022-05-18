@@ -67,3 +67,12 @@
   background: var(--color-yellow);
   color: var(--color-white);
 }
+.btn-group > .btn{
+  margin-right: 10px;
+}
+/* Container */
+.container{
+  width: 100%;
+  max-width: 90%;
+  margin: 30px auto;
+}
