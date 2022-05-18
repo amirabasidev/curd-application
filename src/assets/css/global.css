@@ -1,0 +1,69 @@
+/* Import File Font.css */
+@import url(./fonts.css);
+
+/* Import File reset.css */
+@import url(./reset.css);
+
+/* Import File Variables */
+@import url(./variable.css);
+
+/* Global Class Form */
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-control > label {
+  font-size: var(--font-size-sm);
+}
+.form-control > input {
+  padding: 7px 13px;
+  border: var(--border-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-sm);
+  box-shadow: var(--box-shadow-sm);
+  border-radius: var(--border-radius-sm);
+  -webkit-border-radius: var(--border-radius-sm);
+  -moz-border-radius: var(--border-radius-sm);
+  -ms-border-radius: var(--border-radius-sm);
+  -o-border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+}
+.form-control > input::placeholder {
+  color: var(--color-gray);
+}
+.form-control > input:focus {
+  border-color: var(--color-blue);
+}
+
+/* Global Class Button */
+.btn {
+  padding: 7px 12px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-sm);
+  border-radius: var(--border-radius-sm);
+  -webkit-border-radius: var(--border-radius-sm);
+  -moz-border-radius: var(--border-radius-sm);
+  -ms-border-radius: var(--border-radius-sm);
+  -o-border-radius: var(--border-radius-sm);
+}
+.btn-primary{
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+.btn-danger{
+  background: var(--color-red);
+  color: var(--color-white);
+}
+.btn-success {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+.btn-warning {
+  background: var(--color-yellow);
+  color: var(--color-white);
+}
