@@ -29,9 +29,6 @@ a {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
 }
-a:hover {
-  color: var(--color-blue);
-}
 table {
   border-collapse: collapse;
 }
