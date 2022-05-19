@@ -1,0 +1,8 @@
+.back{
+    display: block;
+    background: url('../../assets/svg/arrowBack.svg') no-repeat center center;
+    background-size: 24px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
