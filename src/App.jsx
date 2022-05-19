@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import Header from "./components/UI/header/Header";
 import Spinner from "./components/UI/spinner/Spinner";
@@ -32,6 +33,17 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Header />
       <div className="container">
         <Suspense fallback={<Spinner minHeight="70vh" />}>
