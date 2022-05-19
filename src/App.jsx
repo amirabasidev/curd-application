@@ -6,6 +6,7 @@ import Header from "./components/UI/header/Header";
 import Spinner from "./components/UI/spinner/Spinner";
 
 const Home = lazy(() => import("./pages/home/Home"));
+const UserForm = lazy(() => import("./components/userForm/UserForm"));
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -51,6 +52,10 @@ const App = () => {
             <Route
               path="/"
               element={<Home users={users} loading={loading} />}
+            />
+            <Route
+              path="/createuser"
+              element={<UserForm getUsers={getUsers}/>}
             />
           </Routes>
         </Suspense>

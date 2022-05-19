@@ -1,0 +1,11 @@
+.userform__head{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.userform__title{
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-lg);
+    color: var(--color-blue);
+}
