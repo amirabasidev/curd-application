@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import BackButton from "../backButton/BackButton";
 
+import BackButton from "../backButton/BackButton";
 import Card from "../UI/card/Card";
 
 import classes from "./userForm.module.css";
 
-const UserForm = ({ getUsers }) => {
+const UserForm = ({ isEdit, users, getUsers }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [isDisabled, setIsDisabled] = useState(false);
   const [values, setValues] = useState({
@@ -26,28 +27,61 @@ const UserForm = ({ getUsers }) => {
 
     if (formVaild()) {
       setIsDisabled(true);
-      try {
-        const res = await fetch(
-          "https://627e6af6271f386ceff7c4c8.mockapi.io/abasidev/users",
-          {
-            method: "POST",
-            headers: {
-              "Content-type": "Application/json",
-            },
-            body: JSON.stringify(values),
-          },
-        );
-
-        if (res.status === 201) {
+      if (!isEdit) {
+        const response = await createUser();
+        if (response.status === 201) {
           navigate("/");
           getUsers();
           toast.success("Created User Successfully!");
         }
-      } catch (error) {
-        throw `Error: ${error}`;
-      } finally {
-        setIsDisabled(false);
+      } else {
+        const response = await editUser();
+        if (response.status === 200) {
+          navigate("/");
+          getUsers();
+          toast.success("Edit User Successfully!");
+        }
       }
+    }
+  };
+
+  const createUser = async () => {
+    try {
+      const res = await fetch(
+        "https://627e6af6271f386ceff7c4c8.mockapi.io/abasidev/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "Application/json",
+          },
+          body: JSON.stringify(values),
+        },
+      );
+      return res;
+    } catch (error) {
+      throw `Error: ${error}`;
+    } finally {
+      setIsDisabled(false);
+    }
+  };
+
+  const editUser = async () => {
+    try {
+      const res = await fetch(
+        `https://627e6af6271f386ceff7c4c8.mockapi.io/abasidev/users/${values.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "Application/json",
+          },
+          body: JSON.stringify(values),
+        },
+      );
+      return res;
+    } catch (error) {
+      throw `Error: ${error}`;
+    } finally {
+      setIsDisabled(false);
     }
   };
 
@@ -68,11 +102,20 @@ const UserForm = ({ getUsers }) => {
     return true;
   };
 
+  useEffect(() => {
+    if (isEdit) {
+      const user = users.find((user) => user.id == id);
+      setValues({ ...user });
+    }
+  }, [users]);
+
   return (
     <Card padding="20px">
       <div className={classes.userform__head}>
         <BackButton />
-        <h2 className={classes.userform__title}>Create User</h2>
+        <h2 className={classes.userform__title}>
+          {isEdit ? "Edit User" : "Create User"}
+        </h2>
       </div>
       <form onSubmit={submitHandler}>
         <div className="form-control">
@@ -106,7 +149,7 @@ const UserForm = ({ getUsers }) => {
           />
         </div>
         <button className="btn btn-success" disabled={isDisabled}>
-          Add User
+          {isEdit ? "Edit" : "Add"} User
         </button>
       </form>
     </Card>

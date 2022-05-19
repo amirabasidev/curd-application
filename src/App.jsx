@@ -55,7 +55,17 @@ const App = () => {
             />
             <Route
               path="/createuser"
-              element={<UserForm getUsers={getUsers}/>}
+              element={<UserForm getUsers={getUsers} />}
+            />
+            <Route
+              path="/edit/:id"
+              element={
+                <UserForm
+                  isEdit
+                  users={users}
+                  getUsers={getUsers}
+                />
+              }
             />
           </Routes>
         </Suspense>
