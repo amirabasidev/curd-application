@@ -7,8 +7,10 @@ import Spinner from "./components/UI/spinner/Spinner";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const UserForm = lazy(() => import("./components/userForm/UserForm"));
+const User = lazy(() => import("./pages/user/User"));
 
 const App = () => {
+  const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,6 +29,22 @@ const App = () => {
       setLoading(false);
     }
   };
+
+  const getUser = async(id) => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://627e6af6271f386ceff7c4c8.mockapi.io/abasidev/users/${id}`,
+      );
+
+      const user = await res.json();
+      setUser(user);
+    } catch (error) {
+      throw `Error: ${error}`;
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
     getUsers();
@@ -80,6 +98,10 @@ const App = () => {
             <Route
               path="/edit/:id"
               element={<UserForm isEdit users={users} getUsers={getUsers} />}
+            />
+            <Route
+              path="/user/:id"
+              element={<User getUser={getUser} user={user} loading={loading}/>}
             />
           </Routes>
         </Suspense>

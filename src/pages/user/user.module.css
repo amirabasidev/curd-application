@@ -1,0 +1,33 @@
+.user__wrapper{
+    width: 750px;
+    margin: 0 auto;
+}
+.user{
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin: 20px 0;
+}
+.user__avatar{
+    width: 25%;
+}
+.user__avatar > img{
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.user__details{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.user__details > h3{
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-lg);
+}
+.user__details > h3 > span{
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-md);
+}
