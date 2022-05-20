@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 import formatDate from "../../../utils/formatDate";
 
-import classes from './userItem.module.css';
+import classes from "./userItem.module.css";
 
-const UserItem = ({user}) => {
+const UserItem = ({ user, deleteUser }) => {
+  const deleteUserHandler = () => deleteUser(user.id);
+
   return (
     <tr className={classes.userItem}>
       <td>{user.name}</td>
@@ -13,9 +15,15 @@ const UserItem = ({user}) => {
       <td>{user.mobile}</td>
       <td>{formatDate(user.createdAt)}</td>
       <td className="btn-group">
-        <Link to={`/user/${user.id}`} className="btn btn-primary">View User</Link>
-        <Link to={`/edit/${user.id}`} className="btn btn-warning">Edit</Link>
-        <button className="btn btn-danger">Delete</button>
+        <Link to={`/user/${user.id}`} className="btn btn-primary">
+          View User
+        </Link>
+        <Link to={`/edit/${user.id}`} className="btn btn-warning">
+          Edit
+        </Link>
+        <button className="btn btn-danger" onClick={deleteUserHandler}>
+          Delete
+        </button>
       </td>
     </tr>
   );

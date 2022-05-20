@@ -5,7 +5,7 @@ import UserItem from "../../components/table/userItem/UserItem";
 
 import userHead from "../../config/userHead";
 
-const Home = ({ users, loading }) => {
+const Home = ({ users, loading, deleteUser }) => {
   return (
     <>
       <Link className="btn btn-primary" to="/createuser">
@@ -14,7 +14,9 @@ const Home = ({ users, loading }) => {
       <Table
         headData={userHead}
         bodyData={users}
-        renderBody={(user) => <UserItem key={user.id} user={user} />}
+        renderBody={(user) => (
+          <UserItem key={user.id} user={user} deleteUser={deleteUser} />
+        )}
         loading={loading}
       />
     </>

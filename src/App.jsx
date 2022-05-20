@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import Header from "./components/UI/header/Header";
 import Spinner from "./components/UI/spinner/Spinner";
@@ -32,6 +32,26 @@ const App = () => {
     getUsers();
   }, []);
 
+  const deleteUser = async (id) => {
+    try {
+      const res = await fetch(
+        `https://627e6af6271f386ceff7c4c8.mockapi.io/abasidev/users/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "Application/json",
+          },
+        },
+      );
+      if(res.status === 200){
+        toast.success("Delete User Successfully!");
+        getUsers();
+      }
+    } catch (error) {
+      throw `Error: ${error}`;
+    }
+  };
+
   return (
     <BrowserRouter>
       <ToastContainer
@@ -51,7 +71,7 @@ const App = () => {
           <Routes>
             <Route
               path="/"
-              element={<Home users={users} loading={loading} />}
+              element={<Home users={users} loading={loading} deleteUser={deleteUser}/>}
             />
             <Route
               path="/createuser"
@@ -59,13 +79,7 @@ const App = () => {
             />
             <Route
               path="/edit/:id"
-              element={
-                <UserForm
-                  isEdit
-                  users={users}
-                  getUsers={getUsers}
-                />
-              }
+              element={<UserForm isEdit users={users} getUsers={getUsers} />}
             />
           </Routes>
         </Suspense>
